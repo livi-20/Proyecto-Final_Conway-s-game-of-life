@@ -4,6 +4,27 @@
 #include <ncurses.h>
 #include "../include/game.h" //Usar cuadrícula puesta en el game.h
 
+//Crear función para la cuadrícula
+void dibujarCuadricula(WINDOW *win, Cuadricula *cuad) {
+    int maxY, maxX;
+    getmaxyx(win, maxY, maxX);
+
+    //dejamos el espacio para el titulo (fila arriba) y los botones (fila abajo)
+    int offsetY = 1;
+    int limiteY = maxY -2
+
+    //recorrer cada fila de la cuadrícula sin salirse de la matriz ni ponerse encima del titulo ni los botones
+    for (unsigned short y = =; y < cuad->alto && (y + offsetY) < limiteY; y++) {
+        for (unsigned short x = 0; x < cuad->ancho && x < (unsigned shot)maxX - 2; x++) {
+            if (cuad->genActucal[y][x])
+                mvwprintw(win, y + offsetY, x + 1, "0"); //célula viva
+            else
+                mvwprintw(win, y + offsetY, x + 1, " "); //célula muerta
+        }
+    }
+}
+
+
 int main (int argc, char ** argv) 
 {
     initscr();
@@ -12,7 +33,7 @@ int main (int argc, char ** argv)
     curs_set(0);
     keypad(stdscr, TRUE);
 
-    //Añadimso la cuadrícula
+    //Añadimos la cuadrícula
     Cuadricula *cuadricula = crearCuadricual(ANCHO_CUADRICULA, ALTO_CUADRICULA);
     if (cuadricula == NULL) {
         edwin();
@@ -39,6 +60,8 @@ int main (int argc, char ** argv)
     mvwprintw(ventana, botones, 27, "+: Acelerar");
     mvwprintw(ventana, botones, 40, "-: Desacelerar");
     mvwprintw(ventana, botones, 56, "SPACE: Avanzar gen");
+
+    dibujarCuadricula(ventana, cuadricula);
     wrefresh(ventana);
     
     int ch;
