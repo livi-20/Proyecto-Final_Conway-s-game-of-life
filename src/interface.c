@@ -1,4 +1,3 @@
-//Version 3; más botones
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncurses.h>
@@ -77,8 +76,8 @@ int main (int argc, char ** argv)
         if (ch != ERR) {
             if (ch == 'q') { //q Salir
                 break;
-            } else id (ch == ' ') { //SPACE avanzar una generación
-                calcularCuadriculaSiguiente(cuadricula);
+            } else if (ch == ' ') { //SPACE avanzar una generación
+                //calcularCuadriculaSiguiente(cuadricula);
                 dibujarCuadricula(ventana, cuadricula);
                 wrefresh(ventana);
             } else if (ch == 'p') { //p Play o Pausa 
@@ -89,13 +88,13 @@ int main (int argc, char ** argv)
                 }
             } else if (ch == '-') { //- Desaelerar (aumenta el delay)
                 if (delay_ms < 1000 ){
-                    delay_ms +-= 50;
+                    delay_ms += 50;
                 }
             }
         }
         //Cuando esta en modo correr, que avance automáticamente
         if (correr) {
-            calcularCuadriculaSiguiente(cuadricula);
+            //calcularCuadriculaSiguiente(cuadricula);
             dibujarCuadricula(ventana, cuadricula);
             wrefresh(ventana);
         }
