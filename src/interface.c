@@ -16,7 +16,7 @@ void dibujarCuadricula(WINDOW *win, Cuadricula *cuad) {
     for (unsigned short y = 0; y < cuad->alto && (y + offsetY) < limiteY; y++) {
         for (unsigned short x = 0; x < cuad->ancho && x < (unsigned short)maxX - 2; x++) {
             if (cuad->genActual[y][x])
-                mvwprintw(win, y + offsetY, x + 1, "0"); //célula viva
+                mvwprintw(win, y + offsetY, x + 1, "█"); //célula viva
             else
                 mvwprintw(win, y + offsetY, x + 1, " "); //célula muerta
         }
@@ -48,17 +48,23 @@ int main (int argc, char ** argv)
     box(ventana, 0, 0);
     mvwprintw(ventana, 0, 2, "Conway's Game of Life");
     
+    
     //Se hace un cambio para usar el tamaño de la ventana y no la terminal como lo tenía anteriormente.
     int win_altura, win_ancho;
+    int alto_panel = 3;
+    int inicio_panel = win_altura - alto_panel -1; //Por el borde inferior
     getmaxyx(ventana, win_altura, win_ancho);
     
-    //4 -> 2 por que es la penúltima fila dentro de la ventana
-    int botones = altura - 2;
-    mvwprintw(ventana, botones, 2, "q: Salir");
-    mvwprintw(ventana, botones, 12, "p: Play/Pausa");
-    mvwprintw(ventana, botones, 27, "+: Acelerar");
-    mvwprintw(ventana, botones, 40, "-: Desacelerar");
-    mvwprintw(ventana, botones, 56, "SPACE: Avanzar gen");
+    mvwhline(ventana, 1, 1, 0, win_ancho -2); //poner lineas separadoras
+    mvwhline(ventana, inicio_panel, 1, 0, win_ancho -2);
+    
+    //Para botones dentro de la caja
+    int botones = inicio_panel +1;
+    mvwprintw(ventana, botones, 2, "[Q]: Salir");
+    mvwprintw(ventana, botones, 12, "[P]: Play/Pausa");
+    mvwprintw(ventana, botones, 27, "[+]: Acelerar");
+    mvwprintw(ventana, botones, 40, "[-]: Desacelerar");
+    mvwprintw(ventana, botones, 56, "[SPACE]: Avanzar generación");
 
     dibujarCuadricula(ventana, cuadricula);
     wrefresh(ventana);
@@ -77,7 +83,7 @@ int main (int argc, char ** argv)
             if (ch == 'q') { //q Salir
                 break;
             } else if (ch == ' ') { //SPACE avanzar una generación
-                //calcularCuadriculaSiguiente(cuadricula);
+                calcularCuadriculaSiguiente(cuadricula);
                 dibujarCuadricula(ventana, cuadricula);
                 wrefresh(ventana);
             } else if (ch == 'p') { //p Play o Pausa 
@@ -94,7 +100,7 @@ int main (int argc, char ** argv)
         }
         //Cuando esta en modo correr, que avance automáticamente
         if (correr) {
-            //calcularCuadriculaSiguiente(cuadricula);
+            calcularCuadriculaSiguiente(cuadricula);
             dibujarCuadricula(ventana, cuadricula);
             wrefresh(ventana);
         }
