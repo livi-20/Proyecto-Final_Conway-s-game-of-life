@@ -101,6 +101,11 @@ Cuadricula* crearCuadricula(unsigned short ancho, unsigned short alto) {
 
 // Función para liberar la memoria asignada a una cuadrícula, incluyendo las matrices de células actuales y siguientes.
 void liberarCuadricula(Cuadricula* cuadricula) {
+    // Verificamos que la cuadrícula no esté vacía.
+    if (cuadricula == NULL) {
+        return;
+    }
+    // Liberamos la memoria asignada a las matrices genActual y genSiguiente.
     if (cuadricula->genActual != NULL) {
         for (unsigned short i = 0; i < cuadricula->alto; i++) {
             free(cuadricula->genActual[i]);
@@ -214,9 +219,8 @@ void reiniciarCuadricula(Cuadricula* cuadricula) {
     if (cuadricula == NULL) {
         return;
     }
-    // Limpiamos ambas matrices (genActual y genSiguiente) restableciendo todas las células a 'false' (muertas). La función memset se utiliza para establecer todos los bytes de la memoria asignada a 0.
+    // Limpiamos la matriz de células siguiente (buffer de escritura), reestableciendo todas las células a 'false' (muertas). La función memset se utiliza para establecer todos los bytes de la memoria asignada a 0.
     for (unsigned short i = 0; i < cuadricula->alto; i++) {
-        memset(cuadricula->genActual[i], 0, cuadricula->ancho * sizeof(bool));
         memset(cuadricula->genSiguiente[i], 0, cuadricula->ancho * sizeof(bool));
     }
     // Generamos una nueva semilla para el generador de números aleatorios.
