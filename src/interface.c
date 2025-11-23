@@ -149,7 +149,7 @@ void mostrarPanelEstado(WINDOW* ventana, uint64_t numGeneracion, int velocidadEv
     const char* textoEstado = programaEnEjecucion ? "CORRIENDO" : "EN PAUSA";   // Texto para el estado del juego.
 
     // Limpiamos la fila del estado de juego antes de actualizarla.
-    mvwhline(ventana, filaEstado, ANCHO_BORDE, ' ', anchoVentana - (ANCHO_BORDE * 3));
+    mvwhline(ventana, filaEstado, ANCHO_BORDE, ' ', anchoVentana - (ANCHO_BORDE * 2));
 
     // Mostramos el estado del juego en la primera línea del panel inferior.
     mvwprintw(ventana, filaEstado, ANCHO_BORDE + 1, "Generación: %llu | Velocidad de Evolución: %d ms | Estado: %s",

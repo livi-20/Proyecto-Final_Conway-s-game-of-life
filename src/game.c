@@ -31,7 +31,9 @@
 Cuadricula* crearCuadricula(unsigned short ancho, unsigned short alto) {
     // Asignamos memoria para la estructura Cuadricula
     Cuadricula* cuadricula = (Cuadricula*)malloc(sizeof(Cuadricula));
-
+    if (cuadricula == NULL) {
+        return NULL; // Retornamos NULL en caso de error al asignar memoria.
+    }
     // Inicializamos los primeros atributos de la estructura.
     cuadricula->ancho = ancho;
     cuadricula->alto = alto;
