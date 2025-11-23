@@ -21,7 +21,7 @@ typedef struct {
 
 // PROTOTIPOS DE FUNCIONES PARA MANEJAR LA CUADRÍCULA Y LA LÓGICA DEL JUEGO
 
-// Función para crear una nueva cuadrícula con las dimensiones especificadas y un 20% de células vivas iniciales (aleatorias).
+// Función para crear una nueva cuadrícula con las dimensiones especificadas y ~20% de células vivas iniciales (aleatorias).
 Cuadricula* crearCuadricula(unsigned short ancho, unsigned short alto);
 
 // Función para liberar la memoria asignada a una cuadrícula.
@@ -39,5 +39,5 @@ unsigned short contarVecinasVivas(Cuadricula* cuadricula, unsigned short x, unsi
 // Función para obtener el número de generación actual.
 uint64_t obtenerNumGeneracion(Cuadricula* cuadricula);
 
-// Función para restablecer la cuadrícula a un estado inicial (con un ~20% de células vivas). Esto puede ser útil para reiniciar el juego sin tener que destruir y recrear la cuadrícula, lo que sería menos eficiente en términos de rendimiento y uso de memoria.
+// Función para restablecer la cuadrícula a un estado inicial (con ~20% de células vivas).
 void reiniciarCuadricula(Cuadricula* cuadricula);

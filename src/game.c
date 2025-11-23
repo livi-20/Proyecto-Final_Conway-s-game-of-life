@@ -27,7 +27,7 @@
 //      - Se utiliza la función rand() para generar posiciones aleatorias.
 
 
-// Función para crear una nueva cuadrícula con las dimensiones especificadas y un 20% de células vivas iniciales (aleatorias).
+// Función para crear una nueva cuadrícula con las dimensiones especificadas y ~20% de células vivas iniciales (aleatorizadas).
 Cuadricula* crearCuadricula(unsigned short ancho, unsigned short alto) {
     // Asignamos memoria para la estructura Cuadricula
     Cuadricula* cuadricula = (Cuadricula*)malloc(sizeof(Cuadricula));
@@ -90,7 +90,7 @@ Cuadricula* crearCuadricula(unsigned short ancho, unsigned short alto) {
     // Usamos srand() y time() para inicializar la semilla del generador de números aleatorios, lo que permite obtener diferentes configuraciones iniciales en cada ejecución del programa.
     srand((unsigned int)time(NULL));
 
-    // Inicializamos la matriz de células actual con un ~20% de células vivas distribuidas aleatoriamente, a través del macro PORCENTAJE_CELULAS_VIVAS_INICIAL.
+    // Inicializamos la matriz de células actual con ~20% de células vivas distribuidas aleatoriamente, a través del macro PORCENTAJE_CELULAS_VIVAS_INICIAL.
     for (unsigned short i = 0; i < alto; i++) {
         for (unsigned short j = 0; j < ancho; j++) {
             cuadricula->genActual[i][j] = PORCENTAJE_CELULAS_VIVAS_INICIAL(20);
