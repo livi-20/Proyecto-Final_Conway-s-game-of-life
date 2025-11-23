@@ -34,9 +34,9 @@ int main (int argc, char ** argv)
     keypad(stdscr, TRUE);
 
     //Añadimos la cuadrícula
-    Cuadricula *cuadricula = crearCuadricual(ANCHO_CUADRICULA, ALTO_CUADRICULA);
+    Cuadricula *cuadricula = crearCuadricula(ANCHO_CUADRICULA, ALTO_CUADRICULA);
     if (cuadricula == NULL) {
-        edwin();
+        endwin();
         fprintf(stderr, "No se pudo crear la cuadrícula.\n");
         return 1;
     }
@@ -63,15 +63,43 @@ int main (int argc, char ** argv)
 
     dibujarCuadricula(ventana, cuadricula);
     wrefresh(ventana);
+
+    //Variables para el estado del juego
+    int correr = 0; // 0 = pausa, 1 = play
+    int delay_ms = 200; //Tiempo entre generaciones en ms (Velocidad inicial = 200 ms)
+    nodelay(ventana, TRUE); //Para que el wgetch no se bloquee esperando una tecla
     
-    //Funcionamiento de las teclas
+    //Funcionamiento de las teclas completo
     int ch;
-    while ((ch = wgetch(ventana)) != 'q'){
-        if (ch == ' ') {
+    while (1) {
+        ch = wgetch(ventana);
+        //Entrar solo si hay una tecla
+        if (ch != ERR) {
+            if (ch == 'q') { //q Salir
+                break;
+            } else id (ch == ' ') { //SPACE avanzar una generación
+                calcularCuadriculaSiguiente(cuadricula);
+                dibujarCuadricula(ventana, cuadricula);
+                wrefresh(ventana);
+            } else if (ch == 'p') { //p Play o Pausa 
+                correr = !correr; //Alternanr entre 0 y 1
+            } else if (ch == '+') { //+ Acelerar (se reduce el delay)
+                if (delay_ms > 50 ){
+                    delay_ms -= 50;
+                }
+            } else if (ch == '-') { //- Desaelerar (aumenta el delay)
+                if (delay_ms < 1000 ){
+                    delay_ms +-= 50;
+                }
+            }
+        }
+        //Cuando esta en modo correr, que avance automáticamente
+        if (correr) {
             calcularCuadriculaSiguiente(cuadricula);
             dibujarCuadricula(ventana, cuadricula);
             wrefresh(ventana);
         }
+        napms(delay_ms);
     }
 
     //Para liberar la memoria de la cuadricula
