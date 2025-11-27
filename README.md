@@ -1,10 +1,23 @@
 # Conway's Game of Life en C (Juego de la vida de Conway)
 Este proyecto se basa en la implementación del juego de la vida de Conway en el lenguaje C, utlizando la bilbioteca de ncurses. Se trata de que se puedan visualizar la evolución de unas "células", vivas o muertas, dentro de una cuadrícula. Se puede controlar la velocidad del tiempo que pasa para ellas, la generación en la que se encuentran y se puede pausar para ver solo un instánte de tiempo.
 
+
 ---
 
 ## Estructura del proyecto
 Se organizó el proyecto en varios modulos, para la facilitación del trabajo en equipo que se realizó. En dos grandes rasgos de dividió en la parte de la lógica del juego y la de la interface de este.
+
+conways-game-of-life
+    include/
+        game.h
+        interface.h
+    src/
+        main.c
+        game.c
+        interface.c
+    Makefile
+    README
+
 
 ### 'Game'
 Contiene la lógica del juego donde se hacen funciones que cumplan con el servicio de:
@@ -27,10 +40,34 @@ Donde se coordina toda la aplicación para que el juego funcione correctamente:
 
 ---
 
+## Dependencias y bibliotecas
+Para compilar y ejecutar correctamente el programa, es necesario contar con las siguientes dependencias:
+
+### Biblioteca **ncursesw**
+El proyecto utiliza ncurses para manejar la interfaz gráfica en la terminal.
+
+***Instalación**
+sudo apt install libncursesw5-dev
+
+### Compilador GCC
+Se necesita GCC para compilar en C
+
+**Instalación**
+sudo apt install gcc
+
+### Make
+Para usar el Makefile se debe instalar
+
+**Instalación**
+sudo apt install make
+
+---
+
 ## Compilación y ejecución
 Este proyecto tiene un MakeFile que automatiza el proceso de compilación, por lo que no es necesario compilar los archivos manualmente.
 
 **Compilar**
+Para ello entre a la terminal de su editor de texto preferido y escriba:
 make
 
 Este comando realiza las siguientes acciones: 
