@@ -1,11 +1,11 @@
 # Conway's Game of Life en C (Juego de la vida de Conway)
-Este proyecto se basa en la implementación del juego de la vida de Conway en el lenguaje C, utlizando la bilbioteca de ncurses. Se trata de que se puedan visualizar la evolución de unas "células", vivas o muertas, dentro de una cuadrícula. Se puede controlar la velocidad del tiempo que pasa para ellas, la generación en la que se encuentran y se puede pausar para ver solo un instánte de tiempo.
+Este proyecto se basa en la implementación del juego de la vida de Conway en el lenguaje C, utlizando la bilbioteca de ncurses. Se trata de que se puedan visualizar la evolución de unas "células", vivas o muertas, dentro de una cuadrícula esto por medio de la biblioteca ncurses. Además de que se puede controlar la velocidad del tiempo que pasa para ellas, la generación en la que se encuentran y se puede pausar para ver solo un instánte de tiempo.
 
 
 ---
 
 ## Estructura del proyecto
-Se organizó el proyecto en varios modulos, para la facilitación del trabajo en equipo que se realizó. En dos grandes rasgos de dividió en la parte de la lógica del juego y la de la interface de este.
+Se organizó el proyecto en varios módulos, para la facilitación del trabajo en equipo. En dos grandes rasgos se dividió en la parte de la lógica del juego y la de la interface de este.
 
 conways-game-of-life
     include/
@@ -22,43 +22,43 @@ conways-game-of-life
 ### 'Game'
 Contiene la lógica del juego donde se hacen funciones que cumplan con el servicio de:
 - Crear y liberar la cuadrícula donde se muestran las células.
-- Conteo de las vecinas de que tiene la célula, con esto aplicamos las reglas del juego.
+- Conteo de las células vecinas que tiene la célula, con esto aplicamos la lógica del juego.
 - Calculamos la cuadrícula siguiente; donde aquí se ve si una célula sobrevive o muere.
 
 ### 'Interface'
 Esta tiene la interfaz gráfica en la terminal, esto se logra gracias a ncurses. También se tienen funciones que sirven para:
 - Inicializar la pantalla en la terminal y la creación de la ventana principal.
-- Dibujo de la cuadrícula con carácteres para las célculas vivas o muertas.
+- Dibujo de la cuadrícula con caractéres para las células vivas o muertas.
 - Creación del panel inferior donde están el estado y los controles.
 
 ### 'Main'
 Donde se coordina toda la aplicación para que el juego funcione correctamente:
-- Inicializa ncurses y la cuadrícula.
-- Controla el bucle principal del juego.
+- Inicializar ncurses y la cuadrícula.
+- Controlar el bucle principal del juego.
 - Procesar las teclas ingresadas por el usuario.
-- Actualiza la simulación cuadro por cuadro.
+- Actualizar la simulación cuadro por cuadro.
 
 ---
 
 ## Dependencias y bibliotecas
 Para compilar y ejecutar correctamente el programa, es necesario contar con las siguientes dependencias:
 
-### Biblioteca **ncursesw**
+### Biblioteca **ncurses**
 El proyecto utiliza ncurses para manejar la interfaz gráfica en la terminal.
 
-***Instalación**
+**Instalación:**
 sudo apt install libncursesw5-dev
 
 ### Compilador GCC
 Se necesita GCC para compilar en C
 
-**Instalación**
+**Instalación:**
 sudo apt install gcc
 
 ### Make
 Para usar el Makefile se debe instalar
 
-**Instalación**
+**Instalación:**
 sudo apt install make
 
 ---
@@ -66,7 +66,7 @@ sudo apt install make
 ## Compilación y ejecución
 Este proyecto tiene un MakeFile que automatiza el proceso de compilación, por lo que no es necesario compilar los archivos manualmente.
 
-**Compilar**
+**Compilar:**
 Para ello entre a la terminal de su editor de texto preferido y escriba:
 make
 
@@ -75,12 +75,12 @@ Este comando realiza las siguientes acciones:
 2. Compila todos los archivos .c
 3. Genera el ejecutable en bin/conway
 
-**Limpiar archivos generados**
+**Limpiar archivos generados:**
 make clean
 
 Elimina la carpeta obj/, bin/ y otoso los archivos compilados.
 
-**Ejecutar con Valgrind**
+**Ejecutar con Valgrind:**
 make valgrind
 
 Este comando corre el ejecutable bajo Valgrind generando un archivo valgrind-report.txt para revisar los memory leaks.
